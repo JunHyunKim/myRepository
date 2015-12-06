@@ -25,12 +25,26 @@
   	<select id="listAll" resultType="BoardVO">
   	<![CDATA[
   	select
-  		bno, title, contnet, writer, regDate, viewCount
+  		bno, title, content, writer, regDate, viewCount
   	from
   		tbl_board
   	where bno > 0
   	order by bno desc, regDate desc
   	]]>
+  	</select>
+  	
+  	<select id="listPage" resultType="BoardVO" >
+  	<![CDATA[
+  	select * from
+   (
+   select /*+index_desc(tbl_board pk_board)*/ 
+   rownum rn, bno, title, writer, regdate, viewcount from tbl_board
+   where bno >  0
+   and rownum <= #{pageNo} * #{perPage}
+   )
+   where rn>(#{pageNo}-1)* #{perPage}
+  	]]>
+  	
   	</select>
   
   

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.com.dao.BoardDAO;
 import org.com.domain.BoardVO;
+import org.com.domain.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,12 @@ public class BoardServiceImpl implements BoardService {
 	public void remove(int bno) throws Exception {
 		// TODO Auto-generated method stub
 		dao.delete(bno);
+	}
+
+	@Override
+	public List<BoardVO> listPage(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listPage(cri);
 	}
 
 }

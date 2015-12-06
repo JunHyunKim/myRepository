@@ -2,6 +2,7 @@ package org.com.test;
 
 import static org.junit.Assert.*;
 
+import org.com.domain.Criteria;
 import org.com.service.BoardService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +24,12 @@ public class BoardServiceTest {
 	
 	@Test
 	public void test() throws Exception {
-		logger.info(service.view(0).toString());
+		logger.info("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+		Criteria cri = new Criteria();
+		cri.setPageNo(2);
+		cri.setPerPage(20);
+		
+		logger.info(service.listPage(cri).toString());
 	}
 
 }

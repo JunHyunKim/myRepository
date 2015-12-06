@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.com.domain.BoardVO;
+import org.com.domain.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -43,6 +44,13 @@ public class BoardDAOImpl implements BoardDAO {
 	public void delete(int bno) throws Exception {
 		// TODO Auto-generated method stub
 		session.delete(namespace+".delete",bno);
+	}
+
+	@Override
+	public List<BoardVO> listPage(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		
+		return session.selectList(namespace+".listPage",cri);
 	}
 
 }
