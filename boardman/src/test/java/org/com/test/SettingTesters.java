@@ -28,6 +28,10 @@ public class SettingTesters {
 	@Autowired
 	private SqlSessionFactory sqlFactory;
 	
+	@Autowired
+	private SqlSession session;
+	
+	
 	
 	@Test
 	public void mybatisTest(){

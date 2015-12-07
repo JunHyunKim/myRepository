@@ -39,11 +39,18 @@
 				</div>
             </div><!-- ./box-body -->
 
+		<!-- 이 곳에 댓글들이 생겨야 한다. -->
+		
+
+
+
 			<div class="box-footer">
 				<button type="submit" class="btn btn-warning">MODIFY</button>
 				<button type="submit" class="btn btn-danger">REMOVE</button>
 				<button type="submit" class="btn btn-primary">LIST ALL</button>
 			</div>
+			
+			
 
 			<script>
                $(document).ready(function() {
