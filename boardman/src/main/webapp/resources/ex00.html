@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+	<div id="displayDiv">
+	
+	</div>
+
+	<script id="template" type="text/x-handlebars-template">
+		<span> {{name}} </span>
+		<div>
+			<span> {{userid}} </span>
+			<span> {{addr}} </span>
+		</div>
+	</script>
+
+	<script>
+		var source = $("#template").html();
+		var template = Handlebars.compile(source);
+		var data = {
+			name : "홍길동",
+			userid : "user00",
+			addr : "조선 한양"
+		};
+
+		$("#displayDiv").html(template(data));
+
+		/*
+			템플릿스크립트가 없었을때
+			var source = "<h1><p>{{name}}</p> <p>{{userid}}</p> <p>{{addr}}</p></h1>";
+			var template = Handlebars.compile(source);
+			var data = {name:"홍길동", userid:"user00", addr:"조선 한양"};
+			
+			$("#displayDiv").html(template(data));
+		 */
+	</script>
+</body>
+</html>
