@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,4 +87,22 @@ public class BoardController {
 		
 		return "redirect:/board/listAll";
 	}
+	
+	@RequestMapping(value="/slist", method=RequestMethod.GET)
+	public void searchListPage(@ModelAttribute("cri")Criteria cri, Model model)throws Exception{
+		logger.info(cri.toString());
+		
+		//model.addAttribute("slist", service.listPage(cri));
+		model.addAttribute("slist", service.listSearchPage(cri));
+		
+		PageMaker pgMaker = new PageMaker();
+		pgMaker.setCri(cri);
+		
+		//pgMaker.setTotalCount(service.countPaging(cri));
+		pgMaker.setTotalCount(service.listSearchCount(cri));
+		
+		model.addAttribute("sPageMaker", pgMaker);
+		
+	}
+	
 }

@@ -1,9 +1,10 @@
 package org.com.test;
 
-import static org.junit.Assert.*;
+import java.util.List;
 
 import org.com.dao.BoardDAO;
 import org.com.domain.BoardVO;
+import org.com.domain.Criteria;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -22,6 +23,27 @@ public class BoardDAOTest {
 	
 	@Autowired
 	private BoardDAO dao;
+	
+	@Test
+	public void searchTest()throws Exception{
+		Criteria cri = new Criteria();
+		
+		cri.setPageNo(1);
+		cri.setKeyword("안녕");
+		cri.setSearchType("t");
+		
+		logger.info("=====================================");
+		
+		List<BoardVO> list = dao.listSearch(cri);
+		
+		for (BoardVO boardVO : list) {
+			logger.info(boardVO.getBno() + ": " + boardVO.getTitle());
+		}
+		logger.info("=====================================");
+		
+		logger.info("count : " + dao.listSearchCount(cri));
+	}
+	
 	
 	@Test
 	public void testCreate() throws Exception {

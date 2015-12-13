@@ -16,11 +16,11 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDAO dao;
 	
-	@Override
-	public List<BoardVO> listAll() throws Exception {
-		// TODO Auto-generated method stub
-		return dao.listAll();
-	}
+//	@Override
+//	public List<BoardVO> listAll() throws Exception {
+//		// TODO Auto-generated method stub
+//		return dao.listAll();
+//	}
 
 	@Override
 	public void regist(BoardVO vo) throws Exception {
@@ -58,6 +58,18 @@ public class BoardServiceImpl implements BoardService {
 	public int countPaging(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.countPaging(cri);
+	}
+
+	@Override
+	public List<BoardVO> listSearchPage(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSearch(cri);
+	}
+
+	@Override
+	public int listSearchCount(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSearchCount(cri);
 	}
 
 }

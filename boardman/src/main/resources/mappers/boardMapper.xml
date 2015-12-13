@@ -22,7 +22,7 @@
   	delete from tbl_board where bno = #{bno}
   	</delete>
   	
-  	<select id="listAll" resultType="BoardVO">
+  	<!--  <select id="listAll" resultType="BoardVO">
   	<![CDATA[
   	select
   		bno, title, content, writer, regDate, viewCount
@@ -31,7 +31,7 @@
   	where bno > 0
   	order by bno desc, regDate desc
   	]]>
-  	</select>
+  	</select> -->
   	
   	<select id="listPage" resultType="BoardVO" >
   	<![CDATA[
@@ -61,7 +61,63 @@
   	<update id="updateViewCnt">
   		update tbl_board set viewcount = viewcount +1 where bno = #{bno}
   	</update>
+  	
+  	
+  	<sql id="search">
+  	<if test="searchType != null" >
+  		
+  		<if test="searchType == 't'.toString()">
+  			and title like CONCAT('%', #{keyword}, '%')
+  		</if>
+  		
+  		<if test="searchType == 'c'.toString()">
+  			and content like CONCAT('%', #{keyword}, '%')
+  		</if>
+  		
+  		<if test="searchType == 'w'.toString()">
+  			and writer like CONCAT('%', #{keyword}, '%')
+  		</if>
+  		
+  		<if test="searchType == 'tc'.toString()">
+  			and (title like CONCAT('%', #{keyword}, '%') OR 
+  			content like CONCAT('%', #{keyword}, '%'))
+  		</if>
+  		
+  		<if test="searchType == 'cw'.toString()">
+  			and (content like CONCAT('%', #{keyword}, '%') OR 
+  			writer like CONCAT('%',	#{keyword}, '%'))
+  		</if>
+  		
+  		<if test="searchType == 'tcw'.toString()">
+  			and ( title like CONCAT('%', #{keyword}, '%') 
+  			OR content like CONCAT('%',	#{keyword}, '%')
+  			OR writer like CONCAT('%', #{keyword}, '%')	)
+  		</if>
+  	</if>
+  	</sql>
+  	
   
+  	<select id="listSearch" resultType="BoardVO" >
+  	<![CDATA[
+  	select * from
+   (
+   select /*+index_desc(tbl_board pk_board)*/ 
+   rownum rn, bno, title, writer, regdate, viewcount, replycount from tbl_board
+   where bno >  0
+   and rownum <= #{pageNo} * #{perPage}
+   )
+   where rn>(#{pageNo}-1)* #{perPage}
+     ]]>
+  	<include refid="search"></include>
+  	
+  	</select>
+  
+  	<select id="listSearchCount" resultType="int">
+  	<![CDATA[
+  	select count(bno) from tbl_board where bno > 0
+  	]]>
+  	<include refid="search"></include>
+  	</select>
   
   
   </mapper>

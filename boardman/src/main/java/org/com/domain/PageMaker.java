@@ -1,5 +1,8 @@
 package org.com.domain;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class PageMaker {
 
 	private int		totalCount;
@@ -11,6 +14,32 @@ public class PageMaker {
 	private	int		displayPageNum = 10;
 	
 	private	Criteria cri;
+	
+	public String makeSearch(int pageNo){
+		
+		UriComponents uriComponents =
+		
+		UriComponentsBuilder.newInstance()
+		.queryParam("pageNo", pageNo)
+		.queryParam("perPage", cri.getPerPage())
+		.queryParam("searchType", ((Criteria)cri).getSearchType())
+		.queryParam("keyword", ((Criteria)cri).getKeyword()).build();
+		
+		return uriComponents.toUriString();
+	}
+	
+	public String makeQuery(int pageNo){
+		
+		UriComponents uriComponents =
+				UriComponentsBuilder.newInstance()
+				.queryParam("pageNo", pageNo)
+				.queryParam("perPage", cri.getPerPage())
+				.build();
+		
+		return uriComponents.toUriString();
+				
+	}
+	
 
 	public int getTotalCount() {
 		return totalCount;

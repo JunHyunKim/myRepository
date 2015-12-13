@@ -18,11 +18,11 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	private static String namespace = "org.com.dao.BoardDAO";
 	
-	@Override
-	public List<BoardVO> listAll() throws Exception {
-		// TODO Auto-generated method stub
-		return session.selectList(namespace+".listAll");
-	}
+//	@Override
+//	public List<BoardVO> listAll() throws Exception {
+//		// TODO Auto-generated method stub
+//		return session.selectList(namespace+".listAll");
+//	}
 
 	@Override
 	public void create(BoardVO vo) throws Exception {
@@ -76,6 +76,18 @@ public class BoardDAOImpl implements BoardDAO {
 	public void updateViewCnt(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
 		session.update(namespace+".updateViewCnt", bno);
+	}
+
+	@Override
+	public List<BoardVO> listSearch(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".listSearch", cri);
+	}
+
+	@Override
+	public int listSearchCount(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".listSearchCount",cri);
 	}
 
 }

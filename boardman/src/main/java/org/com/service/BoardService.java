@@ -7,7 +7,7 @@ import org.com.domain.Criteria;
 
 public interface BoardService {
 
-	public List<BoardVO> listAll()throws Exception;
+	//public List<BoardVO> listAll()throws Exception;
 	
 	public List<BoardVO> listPage(Criteria cri)throws Exception;
 	
@@ -20,5 +20,9 @@ public interface BoardService {
 	public void remove(int bno)throws Exception;
 	
 	public int countPaging(Criteria cri)throws Exception;
+	
+	public List<BoardVO> listSearchPage(Criteria cri)throws Exception;
+	
+	public int listSearchCount(Criteria cri)throws Exception;
 	
 }

@@ -7,7 +7,7 @@ import org.com.domain.Criteria;
 
 public interface BoardDAO {
 
-	public List<BoardVO> listAll()throws Exception;
+	//public List<BoardVO> listAll()throws Exception;
 	
 	public List<BoardVO> listPage(Criteria cri)throws Exception;
 	
@@ -25,6 +25,9 @@ public interface BoardDAO {
 	
 	public void updateViewCnt(Integer bno)throws Exception;
 	
+	public List<BoardVO> listSearch(Criteria cri)throws Exception;
+	
+	public int listSearchCount(Criteria cri)throws Exception;
 	
 	
 }
